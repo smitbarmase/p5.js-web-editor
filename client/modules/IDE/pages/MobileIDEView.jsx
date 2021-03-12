@@ -288,6 +288,8 @@ const MobileIDEView = (props) => {
   const { consoleIsExpanded } = ide;
   const { name: filename } = selectedFile;
 
+  const canEditProject = !project.owner || (user.authenticated && isUserOwner);
+
   // Force state reset
   useEffect(clearPersistedState, []);
   useEffect(() => {
@@ -319,7 +321,7 @@ const MobileIDEView = (props) => {
     (toggle) => (
       <MobileExplorer
         id={getRootFileID(files)}
-        canEdit={false}
+        canEdit={canEditProject}
         onPressClose={toggle}
       />
     ),
